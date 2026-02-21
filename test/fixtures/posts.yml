@@ -2,18 +2,18 @@
 
 one:
   page: exploring
-  title: MyString
-  slug: MyString
-  published: false
+  title: First Test Post
+  slug: first-test-post
+  published: true
   published_at: 2026-02-20 22:05:42
-  meta_description: MyText
+  meta_description: First test post description
   position: 1
 
 two:
   page: learning
-  title: MyString
-  slug: MyString
-  published: false
-  published_at: 2026-02-20 22:05:42
-  meta_description: MyText
+  title: Second Test Post
+  slug: second-test-post
+  published: true
+  published_at: 2026-02-21 22:05:42
+  meta_description: Second test post description
   position: 1
