@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_21_010558) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_22_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,16 +52,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_010558) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.text "description"
-    t.string "name"
-    t.integer "position"
-    t.string "slug"
-    t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_categories_on_slug", unique: true
-  end
-
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.datetime "created_at"
     t.string "scope"
@@ -74,6 +64,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_010558) do
   end
 
   create_table "pages", force: :cascade do |t|
+    t.boolean "acts_as_category", default: false, null: false
+    t.text "category_description"
     t.datetime "created_at", null: false
     t.text "meta_description"
     t.integer "position"
@@ -85,16 +77,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_010558) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.text "meta_description"
+    t.bigint "page_id"
     t.integer "position"
     t.boolean "published"
     t.datetime "published_at"
     t.string "slug"
     t.string "title"
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["page_id"], name: "index_posts_on_page_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
@@ -108,5 +100,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_010558) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "posts", "categories"
+  add_foreign_key "posts", "pages"
 end

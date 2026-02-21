@@ -21,9 +21,40 @@
       <%= f.text_field :title, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" %>
     </div>
 
-    <div class="mb-4">
-      <%= f.label :content, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= f.rich_text_area :content, class: "min-h-[400px]" %>
+    <!-- Category/Static Toggle -->
+    <div class="mb-6 p-4 bg-gray-50 rounded-lg border">
+      <div class="flex items-center mb-2">
+        <%= f.check_box :acts_as_category, class: "h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" %>
+        <%= f.label :acts_as_category, "This is a category page", class: "ml-2 block text-sm font-medium text-gray-700" %>
+      </div>
+      
+      <% if @page.category? && @page.posts.any? %>
+        <div class="ml-6 mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded">
+          <p class="text-sm text-yellow-800">
+            <strong>Warning:</strong> This category has <%= @page.posts.count %> post(s). 
+            Converting to a static page will hide these posts from the site.
+          </p>
+        </div>
+      <% end %>
+      
+      <p class="text-xs text-gray-500 ml-6 mt-2">
+        Category pages can have multiple posts. Static pages have single rich-text content.
+      </p>
+    </div>
+
+    <!-- Category Description (only for categories) -->
+    <div id="category-fields" class="mb-4">
+      <%= f.label :category_description, "Category Description", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_area :category_description, rows: 2, 
+          class: "w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" %>
+      <p class="text-xs text-gray-500 mt-1">Only displayed for category pages</p>
+    </div>
+
+    <!-- Content (only for static pages) -->
+    <div id="content-fields" class="mb-4">
+      <%= f.label :content, "Content", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.rich_text_area :content, class: "min-h-[300px]" %>
+      <p class="text-xs text-gray-500 mt-1">Only displayed for static pages</p>
     </div>
 
     <div class="mb-4">
@@ -48,6 +79,11 @@
     <div class="flex justify-between items-center">
       <div class="text-sm text-gray-500">
         URL: <code class="bg-gray-100 px-2 py-1 rounded">/<%= @page.slug %></code>
+        <% if @page.category? %>
+          <span class="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Category</span>
+        <% else %>
+          <span class="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">Static</span>
+        <% end %>
       </div>
       
       <div>

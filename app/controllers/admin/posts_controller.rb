@@ -1,7 +1,7 @@
 module Admin
   class PostsController < Admin::BaseController
     before_action :set_post, only: [ :show, :edit, :update, :destroy ]
-    before_action :set_categories, only: [ :new, :edit, :create, :update ]
+    before_action :set_pages, only: [ :new, :edit, :create, :update ]
 
     def index
       @posts = Post.ordered
@@ -48,12 +48,12 @@ module Admin
       @post = Post.friendly.find(params[:id])
     end
 
-    def set_categories
-      @categories = Category.ordered
+    def set_pages
+      @pages = Page.categories.ordered
     end
 
     def post_params
-      params.require(:post).permit(:category_id, :title, :content, :published,
+      params.require(:post).permit(:page_id, :title, :content, :published,
                                     :published_at, :meta_description, :position)
     end
   end

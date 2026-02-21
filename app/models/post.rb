@@ -1,13 +1,14 @@
 class Post < ApplicationRecord
   extend FriendlyId
 
-  belongs_to :category
+  belongs_to :page
   has_rich_text :content
 
   friendly_id :title, use: :slugged
 
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
+  validates :page, presence: true
 
   scope :published, -> { where(published: true).where("published_at <= ?", Time.current) }
   scope :draft, -> { where(published: false).or(where("published_at > ?", Time.current)) }

@@ -3,7 +3,7 @@ module Admin
     def index
       @posts_count = Post.count
       @pages_count = Page.count
-      @categories_count = Category.count
+      @categories_count = Page.categories.count
       @recent_posts = Post.ordered.limit(5)
     end
   end

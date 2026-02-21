@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   # Admin routes
   namespace :admin do
     root "dashboard#index"
-    resources :categories
     resources :posts
     resources :pages
     resources :redirects
@@ -14,15 +13,9 @@ Rails.application.routes.draw do
   # Public routes
   root "home#index"
 
-  # Category routes (MUST come before redirects and pages to avoid being caught by wildcard routes)
-  get "/:category_id/:id", to: "posts#show", as: :category_post
-  get "/:category_id", to: "categories#show", as: :category
+  # Posts under their parent page
+  get "/:page_id/:id", to: "posts#show", as: :page_post
 
-  # Static pages (e.g., /a-dev)
-  # Exclude common category names from being caught by pages
+  # Everything else is a page (static or category)
   get "/:id", to: "pages#show", as: :page
-
-  # Smart redirects - LAST resort for unmatched routes
-  # This catches any remaining single-segment URLs and checks for redirects
-  get "/:source", to: "redirects#show", constraints: { source: /[a-z0-9\-]+/ }, as: :smart_redirect
 end
