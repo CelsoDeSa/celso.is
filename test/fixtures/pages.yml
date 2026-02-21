@@ -24,7 +24,6 @@ a_dev:
   title: a dev
   slug: a-dev
   acts_as_category: false
-  content: <h2>Developer content</h2>
   meta_description: Developer portfolio and projects
   published: true
   position: 3
@@ -33,7 +32,6 @@ a_mindhacker:
   title: a mindhacker
   slug: a-mindhacker
   acts_as_category: false
-  content: <h2>Mindhacker content</h2>
   meta_description: Biohacking and optimization
   published: true
   position: 4
