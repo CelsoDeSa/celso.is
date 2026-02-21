@@ -11,16 +11,18 @@ Rails.application.routes.draw do
     resources :redirects
   end
 
-  # Smart redirects (check before other routes)
-  get "/:source", to: "redirects#show", constraints: { source: /[a-z0-9\-]+/ }, as: :smart_redirect
-
   # Public routes
   root "home#index"
 
-  # Category posts (e.g., /exploring/sleep)
+  # Category routes (MUST come before redirects and pages to avoid being caught by wildcard routes)
   get "/:category_id/:id", to: "posts#show", as: :category_post
   get "/:category_id", to: "categories#show", as: :category
 
   # Static pages (e.g., /a-dev)
+  # Exclude common category names from being caught by pages
   get "/:id", to: "pages#show", as: :page
+
+  # Smart redirects - LAST resort for unmatched routes
+  # This catches any remaining single-segment URLs and checks for redirects
+  get "/:source", to: "redirects#show", constraints: { source: /[a-z0-9\-]+/ }, as: :smart_redirect
 end
