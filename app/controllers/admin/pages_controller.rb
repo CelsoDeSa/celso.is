@@ -12,6 +12,7 @@ module Admin
     def new
       @page = Page.new
       @page.published = true
+      @page.acts_as_category = false
     end
 
     def create
@@ -47,7 +48,8 @@ module Admin
     end
 
     def page_params
-      params.require(:page).permit(:title, :content, :published, :meta_description, :position)
+      params.require(:page).permit(:title, :content, :published, :meta_description,
+                                    :position, :acts_as_category, :category_description)
     end
   end
 end

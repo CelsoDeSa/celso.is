@@ -20,7 +20,7 @@
   <div class="bg-white rounded-lg shadow p-6">
     <div class="text-3xl font-bold text-purple-600"><%= @categories_count %></div>
     <div class="text-gray-600">Categories</div>
-    <%= link_to "Manage Categories", admin_categories_path, class: "text-purple-600 hover:text-purple-800 text-sm mt-2 inline-block" %>
+    <p class="text-purple-600 text-sm mt-2">Manage via Pages → Mark as "Category"</p>
   </div>
 </div>
 
@@ -31,7 +31,6 @@
   <div class="flex flex-wrap gap-4">
     <%= link_to "+ New Post", new_admin_post_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
     <%= link_to "+ New Page", new_admin_page_path, class: "bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" %>
-    <%= link_to "+ New Category", new_admin_category_path, class: "bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700" %>
     <%= link_to "+ New Redirect", new_admin_redirect_path, class: "bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700" %>
   </div>
 </div>
@@ -51,14 +50,14 @@
               <%= link_to post.title, edit_admin_post_path(post), class: "hover:text-blue-600" %>
             </div>
             <div class="text-sm text-gray-500">
-              <%= post.category.name %> • 
+              <%= post.page.title %> • 
               <%= post.published? ? "Published" : "Draft" %> • 
               <%= post.published_at.strftime("%b %d, %Y") %>
             </div>
           </div>
           
           <div class="flex space-x-2">
-            <%= link_to "View", category_post_path(post.category, post), class: "text-blue-600 hover:text-blue-800 text-sm", target: "_blank" %>
+            <%= link_to "View", page_post_path(post.page, post), class: "text-blue-600 hover:text-blue-800 text-sm", target: "_blank" %>
             <%= link_to "Edit", edit_admin_post_path(post), class: "text-gray-600 hover:text-gray-800 text-sm" %>
           </div>
         </div>

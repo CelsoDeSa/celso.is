@@ -1,15 +1,39 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  slug: MyString
-  meta_description: MyText
-  published: false
+# Category pages (acts_as_category: true)
+exploring:
+  title: Exploring
+  slug: exploring
+  acts_as_category: true
+  category_description: Deep dives into various topics
+  meta_description: Exploring different topics and ideas
+  published: true
   position: 1
 
-two:
-  title: MyString
-  slug: MyString
-  meta_description: MyText
-  published: false
-  position: 1
+learning:
+  title: Learning
+  slug: learning
+  acts_as_category: true
+  category_description: Learning new skills and concepts
+  meta_description: Learning in public
+  published: true
+  position: 2
+
+# Static pages (acts_as_category: false)
+a_dev:
+  title: a dev
+  slug: a-dev
+  acts_as_category: false
+  content: <h2>Developer content</h2>
+  meta_description: Developer portfolio and projects
+  published: true
+  position: 3
+
+a_mindhacker:
+  title: a mindhacker
+  slug: a-mindhacker
+  acts_as_category: false
+  content: <h2>Mindhacker content</h2>
+  meta_description: Biohacking and optimization
+  published: true
+  position: 4

@@ -1,12 +1,12 @@
 <div class="max-w-4xl mx-auto px-4 py-12">
   <header class="mb-12">
     <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-      <%= @category.name %>
+      <%= @page.title %>
     </h1>
     
-    <% if @category.description.present? %>
+    <% if @page.category_description.present? %>
       <p class="text-xl text-gray-600">
-        <%= @category.description %>
+        <%= @page.category_description %>
       </p>
     <% end %>
   </header>
@@ -14,7 +14,7 @@
   <% if @posts.any? %>
     <div class="grid gap-8">
       <% @posts.each do |post| %>
-        <%= link_to category_post_path(@category, post), class: "block group" do %>
+        <%= link_to page_post_path(@page, post), class: "block group" do %>
           <article class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
             <h2 class="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-3">
               <%= post.title %>
