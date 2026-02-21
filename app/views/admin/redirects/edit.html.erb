@@ -1,0 +1,44 @@
+<div class="max-w-4xl mx-auto">
+  <div class="flex items-center mb-6">
+    <%= link_to "&larr; Back", admin_redirects_path, class: "text-gray-600 hover:text-gray-900 mr-4" %>
+    <h1 class="text-2xl font-bold text-gray-900">Edit Redirect</h1>
+  </div>
+
+  <%= form_with model: [:admin, @redirect], class: "bg-white rounded-lg shadow p-6" do |f| %>
+    <% if @redirect.errors.any? %>
+      <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+        <h3 class="text-red-800 font-medium"><%= pluralize(@redirect.errors.count, "error") %> prohibited this redirect from being saved:</h3>
+        <ul class="mt-2 text-red-700">
+          <% @redirect.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.label :source, "Source Path", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <div class="flex">
+        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+          celso.is/
+        </span>
+        <%= f.text_field :source, class: "flex-1 rounded-r-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500" %>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :destination, "Destination URL", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field :destination, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500" %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :active, "Active", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.check_box :active, class: "rounded border-gray-300 text-gray-600 shadow-sm focus:border-gray-500 focus:ring-gray-500" %>
+    </div>
+
+    <div class="flex justify-end">
+      <%= link_to "Cancel", admin_redirects_path, class: "mr-4 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50" %>
+      <%= f.submit "Update Redirect", class: "px-4 py-2 bg-gray-600 text-white rounded-md text-sm font-medium hover:bg-gray-700" %>
+    </div>
+  <% end %>
+</div>

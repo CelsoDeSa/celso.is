@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) + " | Celso.is" : "Celso.is" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Celso.is">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'Celso is exploring, experimenting, learning, and thinking about life, code, and everything in between.' %>">
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+    
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    
+    <%# Tailwind CSS %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-50">
+    <% if flash[:alert] %>
+      <div class="bg-red-100 border-b border-red-200 text-red-800 px-4 py-3" role="alert">
+        <div class="max-w-7xl mx-auto"><%= flash[:alert] %></div>
+      </div>
+    <% end %>
+    
+    <% if flash[:notice] %>
+      <div class="bg-green-100 border-b border-green-200 text-green-800 px-4 py-3" role="alert">
+        <div class="max-w-7xl mx-auto"><%= flash[:notice] %></div>
+      </div>
+    <% end %>
+    
+    <main>
+      <%= yield %>
+    </main>
+    
+    <footer class="bg-white border-t mt-20 py-8">
+      <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+        <p>&copy; <%= Time.current.year %> Celso.is — Built with Rails, Tailwind, and curiosity.</p>
+      </div>
+    </footer>
+  </body>
+</html>
