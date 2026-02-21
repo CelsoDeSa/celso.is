@@ -1,0 +1,31 @@
+<div class="max-w-4xl mx-auto px-4 py-12">
+  <article class="prose prose-lg max-w-none">
+    <header class="mb-8">
+      <div class="text-sm font-semibold text-blue-600 mb-2">
+        <%= link_to @category.name, category_path(@category) %>
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <%= @post.title %>
+      </h1>
+      
+      <div class="text-gray-500 text-sm">
+        Published on <%= @post.published_at.strftime("%B %d, %Y") %>
+      </div>
+    </header>
+    
+    <div class="text-gray-700 leading-relaxed">
+      <%= @post.content %>
+    </div>
+  </article>
+  
+  <div class="mt-12 pt-8 border-t flex justify-between items-center">
+    <%= link_to category_path(@category), class: "text-blue-600 hover:text-blue-800 font-medium" do %>
+      &larr; Back to <%= @category.name %>
+    <% end %>
+    
+    <%= link_to root_path, class: "text-gray-600 hover:text-gray-800 font-medium" do %>
+      Home
+    <% end %>
+  </div>
+</div>

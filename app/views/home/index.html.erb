@@ -1,0 +1,75 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 py-12">
+  <div class="max-w-4xl w-full text-center">
+    <!-- Main Title -->
+    <h1 class="text-6xl md:text-8xl font-bold text-gray-900 mb-16 tracking-tight">
+      Celso is
+    </h1>
+    
+    <!-- Link Boxes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <!-- Top Row: Two boxes -->
+      <%= link_to page_path("a-dev"), 
+          class: "group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 p-8 border-2 border-transparent hover:border-blue-500" do %>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span class="relative text-2xl md:text-3xl font-semibold text-gray-800 group-hover:text-blue-700">
+          a dev
+        </span>
+        <div class="mt-2 text-sm text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Code, systems, and technical experiments
+        </div>
+      <% end %>
+      
+      <%= link_to page_path("a-mindhacker"), 
+          class: "group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 p-8 border-2 border-transparent hover:border-purple-500" do %>
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span class="relative text-2xl md:text-3xl font-semibold text-gray-800 group-hover:text-purple-700">
+          a mindhacker
+        </span>
+        <div class="mt-2 text-sm text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Biohacking, optimization, and mental models
+        </div>
+      <% end %>
+      
+      <!-- Bottom Row: Centered single box (spans full width on mobile, centers on desktop) -->
+      <div class="md:col-span-2 flex justify-center">
+        <%= link_to page_path("an-explorer"), 
+            class: "group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 p-8 border-2 border-transparent hover:border-green-500 w-full md:w-1/2" do %>
+          <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <span class="relative text-2xl md:text-3xl font-semibold text-gray-800 group-hover:text-green-700">
+            an explorer
+          </span>
+          <div class="mt-2 text-sm text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Money, health, ideas, and everything in between
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <!-- Recent Posts Section -->
+    <% if @recent_posts.any? %>
+      <div class="mt-20 text-left">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Recent Writings</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <% @recent_posts.each do |post| %>
+            <%= link_to category_post_path(post.category, post), class: "block group" do %>
+              <article class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
+                <div class="text-xs font-semibold text-blue-600 mb-2 uppercase tracking-wide">
+                  <%= post.category.name %>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <%= post.title %>
+                </h3>
+                <p class="mt-2 text-gray-600 text-sm line-clamp-2">
+                  <%= strip_tags(post.content.to_s).truncate(100) %>
+                </p>
+                <div class="mt-4 text-xs text-gray-400">
+                  <%= post.published_at.strftime("%B %d, %Y") %>
+                </div>
+              </article>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
