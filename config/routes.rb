@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   end
 
   # Public routes
-  root "home#index"
+  root to: redirect("/a-dev")
+  get "/a-dev", to: "home#resume", as: :resume
 
   # Posts under their parent page
   get "/:page_id/:id", to: "posts#show", as: :page_post

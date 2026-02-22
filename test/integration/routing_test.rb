@@ -11,8 +11,7 @@ class RoutingTest < ActionDispatch::IntegrationTest
 
   test "homepage renders successfully" do
     get root_path
-    assert_response :success
-    assert_select "h1", "Celso is"
+    assert_redirected_to resume_path
   end
 
   test "category page renders list of posts" do
@@ -25,7 +24,8 @@ class RoutingTest < ActionDispatch::IntegrationTest
   test "static page renders content" do
     get page_path(@a_dev)
     assert_response :success
-    assert_select "h1", "a dev"
+    # The /a-dev route now points directly to the resume action instead of pages#show
+    assert_select "h1", "Celso is a Dev"
   end
 
   test "individual post under category renders" do
@@ -38,8 +38,8 @@ class RoutingTest < ActionDispatch::IntegrationTest
   test "non-existent page redirects with error" do
     get "/non-existent-page"
     assert_redirected_to root_path
-    follow_redirect!
-    assert_select "[role='alert']", /Page not found/
+    assert_not_nil flash[:alert]
+    assert_match /Page not found/, flash[:alert]
   end
 
   test "category pages don't show 'Category not found' error" do
@@ -52,7 +52,7 @@ class RoutingTest < ActionDispatch::IntegrationTest
     # This verifies /a-dev shows the page, not trying to find a category
     get page_path(@a_dev)
     assert_response :success
-    assert_select "h1", "a dev"
+    assert_select "h1", "Celso is a Dev"
     assert_no_match /Category not found/i, response.body
   end
 
