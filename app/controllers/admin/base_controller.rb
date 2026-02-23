@@ -7,9 +7,7 @@ module Admin
 
     def authenticate
       authenticate_or_request_with_http_basic do |username, password|
-        # For now, use simple credentials
-        # Change these after first login!
-        username == "admin" && password == "changeme123"
+        username == ENV["ADMIN_USERNAME"] && password == ENV["ADMIN_PASSWORD"]
       end
     end
   end

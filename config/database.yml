@@ -90,6 +90,7 @@ production:
     database: celso_production
     username: celso
     password: <%= ENV["CELSO_DATABASE_PASSWORD"] %>
+    host: <%= ENV["DB_HOST"] || "celso-db" %>
   cache:
     <<: *primary_production
     database: celso_production_cache
