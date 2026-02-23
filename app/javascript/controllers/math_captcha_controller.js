@@ -102,8 +102,8 @@ export default class extends Controller {
   success() {
     this.closeModal()
 
-    // Hide trigger button
-    this.triggerTarget.classList.add("hidden")
+    // Hide trigger button by removing it from the DOM entirely to prevent layout gaps
+    this.triggerTarget.remove()
 
     // Show email link initially transparent and scaled down
     this.emailLinkTarget.classList.remove("hidden")
