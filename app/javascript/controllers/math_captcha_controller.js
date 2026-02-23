@@ -107,6 +107,7 @@ export default class extends Controller {
 
     // Show email link initially transparent and scaled down
     this.emailLinkTarget.classList.remove("hidden")
+    this.emailLinkTarget.classList.add("inline-flex")
 
     // Animate email link into final state
     requestAnimationFrame(() => {
