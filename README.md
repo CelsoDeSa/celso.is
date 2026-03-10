@@ -93,7 +93,7 @@ bin/rails server
    ```
 
 4. **Configure Kamal**
-   Update `.kamal/deploy.yml` with your server IP (YOUR_SERVER_IP)
+   Update `.kamal/deploy.yml` with your server IP
 
 ### Phase 3: Deploy
 
@@ -193,6 +193,7 @@ Database and uploads are backed up to `/var/backups/celso-is/`
 
 Manual backup:
 ```bash
+# SSH to your server (see your Kamal config for IP)
 ssh YOUR_USER@YOUR_SERVER_IP
 /home/YOUR_USER/backup.sh
 ```
@@ -220,7 +221,7 @@ docker build .
 ### Getting Help
 
 1. Check Rails logs: `kamal logs --follow`
-2. Check server: `ssh YOUR_USER@YOUR_SERVER_IP`
+2. Check server: `ssh YOUR_USER@YOUR_SERVER_IP` (replace with your actual server IP)
 3. Rails console: `kamal console`
 
 ## 📄 License
