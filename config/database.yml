@@ -89,7 +89,7 @@ production:
     <<: *default
     database: celso_production
     username: celso
-    password: <%= ENV["CELSO_DATABASE_PASSWORD"] %>
+    password: <%= Rails.application.credentials.dig(:database, :password) || ENV["CELSO_DATABASE_PASSWORD"] %>
     host: <%= ENV["DB_HOST"] || "celso-db" %>
   cache:
     <<: *primary_production
