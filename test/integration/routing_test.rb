@@ -79,4 +79,38 @@ class RoutingTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "table tbody tr", count: Page.count
   end
+
+  test "active redirect redirects to internal destination" do
+    get "/contact"
+    assert_redirected_to "/a-dev"
+    assert_equal 302, status
+  end
+
+  test "active redirect redirects to external destination" do
+    get "/github"
+    assert_redirected_to "https://github.com/celso"
+    assert_equal 302, status
+  end
+
+  test "inactive redirect does not redirect and falls back to page not found" do
+    get "/old-page"
+    # Should not redirect to /a-dev (the destination of inactive_redirect)
+    assert_redirected_to root_path
+    assert_not_nil flash[:alert]
+    assert_match /Page not found/, flash[:alert]
+  end
+
+  test "redirect takes precedence over page lookup" do
+    # /contact is a redirect, not a page
+    get "/contact"
+    assert_redirected_to "/a-dev"
+  end
+
+  test "admin redirects index lists all redirects" do
+    get admin_redirects_path, headers: {
+      "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Basic.encode_credentials("admin", "changeme123")
+    }
+    assert_response :success
+    assert_select "table tbody tr", count: Redirect.count
+  end
 end
